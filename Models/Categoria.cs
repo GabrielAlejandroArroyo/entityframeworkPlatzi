@@ -11,5 +11,8 @@ namespace entityframeworkPlatzi.Models
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
 
+        //Trae todas las tareas asociadas a la categoria
+        public virtual ICollection<Tarea> Tareas { get; set; }
+
     }
 }

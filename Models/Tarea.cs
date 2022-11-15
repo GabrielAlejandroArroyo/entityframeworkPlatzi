@@ -14,6 +14,9 @@ namespace entityframeworkPlatzi.Models
         public string Descripcion { get; set; }
         public Prioridad PrioridadTarea { get; set; }
         public DateTime FechaCreacion { get; set; }
+
+        //Categoria sociada a la Tarea
+        public virtual Categoria Categoria { get; set; }
     }
 
     public enum Prioridad
