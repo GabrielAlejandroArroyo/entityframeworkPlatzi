@@ -16,5 +16,35 @@ namespace entityframeworkPlatzi
         {
 
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Categoria>(categoria =>
+            {
+                categoria.ToTable("Categoria");
+                categoria.HasKey(p => p.CetegoriaId);
+
+                categoria.Property(p => p.Nombre).IsRequired().HasMaxLength(150);
+
+                categoria.Property(p => p.Descripcion);
+            });
+
+            modelBuilder.Entity<Tarea>(tarea =>
+            {
+                tarea.ToTable("Tarea");
+                tarea.HasKey(p => p.CategoriaId);
+
+                tarea.HasOne(p => p.Categoria).WithMany(p => p.Tareas).HasForeignKey(p => p.CategoriaId);
+
+                tarea.Property(p => p.Titulo).IsRequired().HasMaxLength(200);
+
+                tarea.Property(p => p.Descripcion);
+                tarea.Property(p => p.PrioridadTarea);
+                tarea.Property(p => p.FechaCreacion);
+
+            });
+
+
+        }
     }
 }
