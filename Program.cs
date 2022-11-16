@@ -4,8 +4,40 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+int dbType = builder.Configuration.GetValue<int>("DbType");
+switch (dbType)
+{
+    case 1:
+        // Base de datos en memoria
+        builder.Services.AddDbContext<TareasContext>(p => p.UseInMemoryDatabase("TareasDB"));
+        break;
+    case 2:
+        // Base de datos en MSSQL Server
+        //builder.Services.AddSqlServer<TareasContext>("Data Source=xxxxx\\xxxxx;Initial Catalog=xxxxxx;user id=xxxxx;password=xxxx");
+        builder.Services.AddSqlServer<TareasContext>(builder.Configuration.GetConnectionString("SqlConnection"));
+        break;
+    case 3:
+        // Base de datos en Postgres
+        //builder.Services.AddSqlServer<TareasContext>("Data Source=xxxxx\\xxxxx;Initial Catalog=xxxxxx;user id=xxxxx;password=xxxx");
+        //builder.Services.AddSqlServer<TareasContext>(builder.Configuration.GetConnectionString("SqlConnection"));
+        break;
+    case 4:
+        // Base de datos en Mysql
+        //builder.Services.AddSqlServer<TareasContext>("Data Source=xxxxx\\xxxxx;Initial Catalog=xxxxxx;user id=xxxxx;password=xxxx");
+        //builder.Services.AddSqlServer<TareasContext>(builder.Configuration.GetConnectionString("SqlConnection"));
+        break;
+    default:
+        // Base de datos en memoria
+        builder.Services.AddDbContext<TareasContext>(p => p.UseInMemoryDatabase("TareasDB"));
+        break;
+}
 // Base de datos en memoria
-builder.Services.AddDbContext<TareasContext>(p => p.UseInMemoryDatabase("TareasDB"));
+//builder.Services.AddDbContext<TareasContext>(p => p.UseInMemoryDatabase("TareasDB"));
+// Base de datos en MSSQL Server
+//builder.Services.AddSqlServer<TareasContext>("Data Source=xxxxx\\xxxxx;Initial Catalog=xxxxxx;user id=xxxxx;password=xxxx");
+//builder.Services.AddSqlServer<TareasContext>(builder.Configuration.GetConnectionString("SqlConnection"));
+
+
 
 
 // builder.Services.AddCors(options =>
