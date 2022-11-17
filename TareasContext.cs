@@ -39,8 +39,12 @@ namespace entityframeworkPlatzi
                 tarea.Property(p => p.Titulo).IsRequired().HasMaxLength(200);
 
                 tarea.Property(p => p.Descripcion);
+
                 tarea.Property(p => p.PrioridadTarea);
+
                 tarea.Property(p => p.FechaCreacion);
+
+                tarea.Ignore(p => p.Resumen);
 
             });
 
