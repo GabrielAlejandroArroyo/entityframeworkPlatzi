@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace entityframeworkPlatzi.Models
@@ -17,7 +18,9 @@ namespace entityframeworkPlatzi.Models
 
         public int Peso { get; set; }
 
-        //Trae todas las tareas asociadas a la categoria
+        //Trae todas las tareas asociadas a la categoria, 
+        //para evitar que la traiga uso de error [JsonIgnore]
+        [JsonIgnore]
         public virtual ICollection<Tarea> Tareas { get; set; }
 
     }

@@ -64,4 +64,28 @@ app.MapGet("/dbconexion", async ([FromServices] TareasContext dbContext) =>
 
 });
 
+app.MapGet("/api/tareas", async ([FromServices] TareasContext dbContext) =>
+{
+    return Results.Ok(dbContext.Tareas);
+
+});
+
+app.MapGet("/api/tareas/prioridad1", async ([FromServices] TareasContext dbContext) =>
+{
+    return Results.Ok(dbContext.Tareas.Where(p => p.PrioridadTarea == entityframeworkPlatzi.Models.Prioridad.baja));
+
+});
+
+app.MapGet("/api/tareas/prioridad/categoria", async ([FromServices] TareasContext dbContext) =>
+{
+    return Results.Ok(dbContext.Tareas.Include(p => p.Categoria).Where(p => p.PrioridadTarea == entityframeworkPlatzi.Models.Prioridad.baja));
+
+});
+
+app.MapGet("/api/categorias", async ([FromServices] TareasContext dbContext) =>
+{
+    return Results.Ok(dbContext.Categorias);
+
+});
+
 app.Run();
