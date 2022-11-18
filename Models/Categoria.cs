@@ -9,11 +9,13 @@ namespace entityframeworkPlatzi.Models
     public class Categoria
     {
         //[Key]
-        public Guid CetegoriaId { get; set; }
+        public Guid CategoriaId { get; set; }
         //[Required]
         //[MaxLength(150)]
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
+
+        public int Peso { get; set; }
 
         //Trae todas las tareas asociadas a la categoria
         public virtual ICollection<Tarea> Tareas { get; set; }

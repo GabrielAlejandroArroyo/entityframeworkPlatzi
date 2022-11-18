@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using entityframeworkPlatzi;
 
@@ -11,9 +12,10 @@ using entityframeworkPlatzi;
 namespace entityframeworkPlatzi.Migrations
 {
     [DbContext(typeof(TareasContext))]
-    partial class TareasContextModelSnapshot : ModelSnapshot
+    [Migration("20221118230252_InitialData")]
+    partial class InitialData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,24 +87,6 @@ namespace entityframeworkPlatzi.Migrations
                     b.HasKey("CategoriaId");
 
                     b.ToTable("Tarea", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            CategoriaId = new Guid("097d60ad-b300-4cbf-8283-7f7df5c61001"),
-                            FechaCreacion = new DateTime(2022, 11, 18, 20, 6, 35, 281, DateTimeKind.Local).AddTicks(9713),
-                            PrioridadTarea = 1,
-                            TareaId = new Guid("097d60ad-b300-4cbf-8283-7f7df5c61003"),
-                            Titulo = "Pago de servicios publicos"
-                        },
-                        new
-                        {
-                            CategoriaId = new Guid("097d60ad-b300-4cbf-8283-7f7df5c61002"),
-                            FechaCreacion = new DateTime(2022, 11, 18, 20, 6, 35, 281, DateTimeKind.Local).AddTicks(9727),
-                            PrioridadTarea = 0,
-                            TareaId = new Guid("097d60ad-b300-4cbf-8283-7f7df5c61004"),
-                            Titulo = "Terminar de ver pelicula en Netflix"
-                        });
                 });
 
             modelBuilder.Entity("entityframeworkPlatzi.Models.Tarea", b =>
