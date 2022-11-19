@@ -12,8 +12,8 @@ using entityframeworkPlatzi;
 namespace entityframeworkPlatzi.Migrations
 {
     [DbContext(typeof(TareasContext))]
-    [Migration("20221118223130_CambioNombreCategoriaId")]
-    partial class CambioNombreCategoriaId
+    [Migration("20221119003923_initcializa")]
+    partial class initcializa
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,7 +31,6 @@ namespace entityframeworkPlatzi.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
@@ -45,15 +44,34 @@ namespace entityframeworkPlatzi.Migrations
                     b.HasKey("CategoriaId");
 
                     b.ToTable("Categoria", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            CategoriaId = new Guid("097d60ad-b300-4cbf-8283-7f7df5c61001"),
+                            Descripcion = "",
+                            Nombre = "Actividades Pendientes",
+                            Peso = 20
+                        },
+                        new
+                        {
+                            CategoriaId = new Guid("097d60ad-b300-4cbf-8283-7f7df5c61002"),
+                            Descripcion = "",
+                            Nombre = "Actividades personales",
+                            Peso = 50
+                        });
                 });
 
             modelBuilder.Entity("entityframeworkPlatzi.Models.Tarea", b =>
                 {
+                    b.Property<Guid>("TareaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("CategoriaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("FechaCreacion")
@@ -62,17 +80,34 @@ namespace entityframeworkPlatzi.Migrations
                     b.Property<int>("PrioridadTarea")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("TareaId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.HasKey("CategoriaId");
+                    b.HasKey("TareaId");
+
+                    b.HasIndex("CategoriaId");
 
                     b.ToTable("Tarea", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            TareaId = new Guid("097d60ad-b300-4cbf-8283-7f7df5c61003"),
+                            CategoriaId = new Guid("097d60ad-b300-4cbf-8283-7f7df5c61001"),
+                            FechaCreacion = new DateTime(2022, 11, 18, 21, 39, 22, 869, DateTimeKind.Local).AddTicks(9243),
+                            PrioridadTarea = 1,
+                            Titulo = "Pago de servicios publicos"
+                        },
+                        new
+                        {
+                            TareaId = new Guid("097d60ad-b300-4cbf-8283-7f7df5c61004"),
+                            CategoriaId = new Guid("097d60ad-b300-4cbf-8283-7f7df5c61002"),
+                            FechaCreacion = new DateTime(2022, 11, 18, 21, 39, 22, 869, DateTimeKind.Local).AddTicks(9257),
+                            PrioridadTarea = 0,
+                            Titulo = "Terminar de ver pelicula en Netflix"
+                        });
                 });
 
             modelBuilder.Entity("entityframeworkPlatzi.Models.Tarea", b =>

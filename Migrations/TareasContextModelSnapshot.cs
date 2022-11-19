@@ -62,6 +62,10 @@ namespace entityframeworkPlatzi.Migrations
 
             modelBuilder.Entity("entityframeworkPlatzi.Models.Tarea", b =>
                 {
+                    b.Property<Guid>("TareaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("CategoriaId")
                         .HasColumnType("uniqueidentifier");
 
@@ -74,33 +78,32 @@ namespace entityframeworkPlatzi.Migrations
                     b.Property<int>("PrioridadTarea")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("TareaId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.HasKey("CategoriaId");
+                    b.HasKey("TareaId");
+
+                    b.HasIndex("CategoriaId");
 
                     b.ToTable("Tarea", (string)null);
 
                     b.HasData(
                         new
                         {
-                            CategoriaId = new Guid("097d60ad-b300-4cbf-8283-7f7df5c61001"),
-                            FechaCreacion = new DateTime(2022, 11, 18, 20, 6, 35, 281, DateTimeKind.Local).AddTicks(9713),
-                            PrioridadTarea = 1,
                             TareaId = new Guid("097d60ad-b300-4cbf-8283-7f7df5c61003"),
+                            CategoriaId = new Guid("097d60ad-b300-4cbf-8283-7f7df5c61001"),
+                            FechaCreacion = new DateTime(2022, 11, 18, 21, 39, 22, 869, DateTimeKind.Local).AddTicks(9243),
+                            PrioridadTarea = 1,
                             Titulo = "Pago de servicios publicos"
                         },
                         new
                         {
-                            CategoriaId = new Guid("097d60ad-b300-4cbf-8283-7f7df5c61002"),
-                            FechaCreacion = new DateTime(2022, 11, 18, 20, 6, 35, 281, DateTimeKind.Local).AddTicks(9727),
-                            PrioridadTarea = 0,
                             TareaId = new Guid("097d60ad-b300-4cbf-8283-7f7df5c61004"),
+                            CategoriaId = new Guid("097d60ad-b300-4cbf-8283-7f7df5c61002"),
+                            FechaCreacion = new DateTime(2022, 11, 18, 21, 39, 22, 869, DateTimeKind.Local).AddTicks(9257),
+                            PrioridadTarea = 0,
                             Titulo = "Terminar de ver pelicula en Netflix"
                         });
                 });

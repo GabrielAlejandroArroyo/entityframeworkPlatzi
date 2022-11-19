@@ -1,4 +1,5 @@
 using entityframeworkPlatzi;
+using entityframeworkPlatzi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -86,6 +87,18 @@ app.MapGet("/api/categorias", async ([FromServices] TareasContext dbContext) =>
 {
     return Results.Ok(dbContext.Categorias);
 
+});
+
+app.MapPost("/api/tareas", async ([FromServices] TareasContext dbContext, [FromBody] Tarea tarea) =>
+{
+    tarea.TareaId = Guid.NewGuid();
+    tarea.FechaCreacion = DateTime.Now;
+    await dbContext.AddAsync(tarea);
+    // Opcion al primer AddAsync
+    //await dbContext.Tareas.AddAsync(tarea);
+
+    await dbContext.SaveChangesAsync();
+    return Results.Ok();
 });
 
 app.Run();

@@ -42,7 +42,7 @@ namespace entityframeworkPlatzi
             modelBuilder.Entity<Tarea>(tarea =>
             {
                 tarea.ToTable("Tarea");
-                tarea.HasKey(p => p.CategoriaId);
+                tarea.HasKey(p => p.TareaId);
 
                 tarea.HasOne(p => p.Categoria).WithMany(p => p.Tareas).HasForeignKey(p => p.CategoriaId);
 
